@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _mouseSensitivity = 2f;
     [SerializeField] private float _speed = 20f;
 
+    public static bool IsBlocked = false;
+
     private float _cameraPitch = 0.0f;
     private CharacterController _cc;
 
@@ -16,8 +18,11 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        UpdatePlayerLook();
-        UpdatePlayerMovement();
+        if (!IsBlocked)
+        {
+            UpdatePlayerLook();
+            UpdatePlayerMovement();
+        }
     }
 
     private void UpdatePlayerLook()

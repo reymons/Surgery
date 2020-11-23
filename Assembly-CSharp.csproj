@@ -52,9 +52,12 @@
     <UnityVersion>2020.1.6f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\CursorManager.cs" />
     <Compile Include="Assets\Scripts\PlayerAnimationHandler.cs" />
+    <Compile Include="Assets\Scripts\CursorManager.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\Global.cs" />
+    <Compile Include="Assets\Scripts\HandWashing.cs" />
+    <Compile Include="Assets\Scripts\CustomTag.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
