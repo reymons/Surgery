@@ -8,6 +8,7 @@ public class PlayerAnimationHandler : MonoBehaviour
     {
         UpdateAnimationWalk();
         UpdateAnimationHandWashing();
+        UpdateAnimationGrabbing();
     }
     
     private void UpdateAnimationWalk()
@@ -17,6 +18,23 @@ public class PlayerAnimationHandler : MonoBehaviour
 
     private void UpdateAnimationHandWashing()
     {
-        _anmtr.SetBool("IsWashing", Global.HandsAreWashed);
+        if (Global.HandsAreWashed)
+        {
+            _anmtr.SetBool("IsWashing", true);
+            Global.HandsAreWashed = false;
+        }
+        else
+            _anmtr.SetBool("IsWashing", false);
+    }
+
+    private void UpdateAnimationGrabbing()
+    {
+        if (Global.PlayerGrabbed)
+        {
+            _anmtr.SetBool("IsGrabbing", true);
+            Global.PlayerGrabbed = false; 
+        }
+        else
+            _anmtr.SetBool("IsGrabbing", false);
     }
 }
