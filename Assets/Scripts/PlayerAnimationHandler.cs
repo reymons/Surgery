@@ -18,10 +18,10 @@ public class PlayerAnimationHandler : MonoBehaviour
 
     private void UpdateAnimationHandWashing()
     {
-        if (Global.HandsAreWashed)
+        if (Global.ForAnimHandsAreWashed)
         {
             _anmtr.SetBool("IsWashing", true);
-            Global.HandsAreWashed = false;
+            Global.ForAnimHandsAreWashed = false;
         }
         else
             _anmtr.SetBool("IsWashing", false);

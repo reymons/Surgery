@@ -55,12 +55,13 @@
     <Compile Include="Assets\Scripts\PlayerAnimationHandler.cs" />
     <Compile Include="Assets\Scripts\CursorManager.cs" />
     <Compile Include="Assets\Scripts\PlayerRaycast.cs" />
-    <Compile Include="Assets\Scripts\Global.cs" />
-    <Compile Include="Assets\Scripts\GrabText.cs" />
-    <Compile Include="Assets\Scripts\CustomTag.cs" />
-    <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\SurgeryCharacterManagement.cs" />
+    <Compile Include="Assets\Scripts\Global.cs" />
+    <Compile Include="Assets\Scripts\GrabAndConsumptionText.cs" />
+    <Compile Include="Assets\Scripts\CustomTag.cs" />
     <Compile Include="Assets\Scripts\Inventory.cs" />
+    <Compile Include="Assets\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\Item.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

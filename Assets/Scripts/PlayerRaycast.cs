@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerRaycast : MonoBehaviour
 {
     [SerializeField] private GameObject _water;
-    [SerializeField] private Text _grabText;
+    [SerializeField] public Text _grabText;
 
-    private float _textTimer;
-
+    [NonSerialized] public float TextTimer;
+    
     [SerializeField] private Inventory _inventory;
 
 
@@ -22,13 +20,13 @@ public class PlayerRaycast : MonoBehaviour
     void Update()
     {
         UpdateRaycast();
-        if (_textTimer < 0)
+        if (TextTimer < 0)
         {
             _grabText.text = "";
-            _textTimer = 0;
+            TextTimer = 0;
         }
         else
-            _textTimer -= Time.deltaTime;
+            TextTimer -= Time.deltaTime;
     }
 
     private void UpdateRaycast()
@@ -50,8 +48,9 @@ public class PlayerRaycast : MonoBehaviour
                 else if (hitTags.HasTag("WashingHands") && Input.GetMouseButtonDown(0) && _water.activeSelf)
                 {
                     Global.HandsAreWashed = true;
-                    _grabText.text = hitObj.GetComponent<GrabText>().Text;
-                    _textTimer = 3;
+                    Global.ForAnimHandsAreWashed = true;
+                    _grabText.text = hitObj.GetComponent<GrabAndConsumptionText>().GrabText;
+                    TextTimer = 3;
                 }
                 else if (hitTags.HasTag("Grabbable") && Input.GetMouseButtonDown(0))
                 {
@@ -61,23 +60,23 @@ public class PlayerRaycast : MonoBehaviour
                     if (hitTags.HasTag("Bandage"))
                     {
                         Global.BandageIsGrabbed = true;
-                        _inventory.Items.Add(new object[] { _inventory.SpriteNotSelectedBandage, _inventory.SpriteSelectedBandage, "Bandage", "NotSelected" });
+                        _inventory.Items.Add(new Item(_inventory.SpriteNotSelectedBandage, _inventory.SpriteSelectedBandage, "Bandage"));
                     }
                     else if (hitTags.HasTag("Beton"))
                     {
                         Global.BetonIsGrabbed = true;
-                        _inventory.Items.Add(new object[] { _inventory.SpriteNotSelectedBeton, _inventory.SpriteSelectedBeton, "Beton", "NotSelected" });
+                        _inventory.Items.Add(new Item(_inventory.SpriteNotSelectedBeton, _inventory.SpriteSelectedBeton, "Beton"));
                     }
                     else if (hitTags.HasTag("Basin"))
                     {
                         Global.BasinIsGrabbed = true;
-                        _inventory.Items.Add(new object[] { _inventory.SpriteNotSelectedBasin, _inventory.SpriteSelectedBasin, "Basin", "NotSelected" });
+                        _inventory.Items.Add(new Item(_inventory.SpriteNotSelectedBasin, _inventory.SpriteSelectedBasin, "Basin"));
                     }
                     
-                    _inventory.UpdateIconSlots();
+                    _inventory.SetNewItemSprite();
 
-                    _grabText.text = hitObj.GetComponent<GrabText>().Text;
-                    _textTimer = 3;
+                    _grabText.text = hitObj.GetComponent<GrabAndConsumptionText>().GrabText;
+                    TextTimer = 3;
                 }
             }
         }
