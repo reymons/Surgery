@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +10,9 @@ public class PlayerRaycast : MonoBehaviour
     [SerializeField] private Text _grabText;
 
     private float _textTimer;
+
+    [SerializeField] private Inventory _inventory;
+
 
     void Start()
     {
@@ -55,11 +59,22 @@ public class PlayerRaycast : MonoBehaviour
                     hitObj.SetActive(false);
 
                     if (hitTags.HasTag("Bandage"))
+                    {
                         Global.BandageIsGrabbed = true;
+                        _inventory.Items.Add(new object[] { _inventory.SpriteNotSelectedBandage, _inventory.SpriteSelectedBandage, "Bandage", "NotSelected" });
+                    }
                     else if (hitTags.HasTag("Beton"))
+                    {
                         Global.BetonIsGrabbed = true;
+                        _inventory.Items.Add(new object[] { _inventory.SpriteNotSelectedBeton, _inventory.SpriteSelectedBeton, "Beton", "NotSelected" });
+                    }
                     else if (hitTags.HasTag("Basin"))
+                    {
                         Global.BasinIsGrabbed = true;
+                        _inventory.Items.Add(new object[] { _inventory.SpriteNotSelectedBasin, _inventory.SpriteSelectedBasin, "Basin", "NotSelected" });
+                    }
+                    
+                    _inventory.UpdateIconSlots();
 
                     _grabText.text = hitObj.GetComponent<GrabText>().Text;
                     _textTimer = 3;
