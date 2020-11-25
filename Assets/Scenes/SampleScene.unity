@@ -405,6 +405,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 49d14cbd81e75a24b874be062aa20040, type: 3}
+--- !u!1 &104968393 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5a3ec9df4629cc44c93bda6d030f1c58, type: 3}
+  m_PrefabInstance: {fileID: 30530124}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &104968397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 104968393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f196f32ae75e9a44091b3c028387673b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tags:
+  - Table
+--- !u!65 &104968398
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 104968393}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.9597256, y: 0.3230134, z: 3.9597256}
+  m_Center: {x: 0, y: 1.8579519, z: 0}
 --- !u!1 &129275592
 GameObject:
   m_ObjectHideFlags: 0
@@ -10108,10 +10140,12 @@ MonoBehaviour:
   SpriteNotSelectedBasin: {fileID: 21300000, guid: b617513b431bc024dae1e4e03dcafb67, type: 3}
   SpriteNotSelectedBandage: {fileID: 21300000, guid: 3d68279a9f188bc42b6a21bf413f68d6, type: 3}
   SpriteNotSelectedBeton: {fileID: 21300000, guid: 896f9cbad09ad7c4086472bc221e2bf8, type: 3}
+  SpriteNotSelectedBetonSoaked: {fileID: 21300000, guid: bcd176f98c020dd42b8ccdd271e07b5e, type: 3}
   SpriteNotSelectedBasinWater: {fileID: 21300000, guid: a4d55be1345364746b42d539a6499ce7, type: 3}
   SpriteSelectedBasin: {fileID: 21300000, guid: 563709f61b0da4246a2670e83bc7acf9, type: 3}
   SpriteSelectedBandage: {fileID: 21300000, guid: 77b52d9b1722b044a8d264756c35d334, type: 3}
   SpriteSelectedBeton: {fileID: 21300000, guid: 2828006d77fdfaa49be9b2c2ec0cd3a4, type: 3}
+  SpriteSelectedBetonSoaked: {fileID: 21300000, guid: e46cced3d1af2aa4aba829ab55318954, type: 3}
   SpriteSelectedBasinWater: {fileID: 21300000, guid: 24b81958fcc0f9d4e8bc744864e0f10d, type: 3}
   SpriteEmpty: {fileID: 21300000, guid: 91aeac8d45876e64c8d4c79e7ff112fd, type: 3}
 --- !u!1 &1596496415
@@ -10819,23 +10853,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 508.8896, y: 114.207825, z: 396.48657}
   m_Center: {x: -2.677553, y: 757.0526, z: 198.24326}
---- !u!114 &1927677028
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1927677021}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32bb892d553a81945a26898acbe70503, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _inventory: {fileID: 1564969054}
-  _filledBasinNotSelected: {fileID: 0}
-  _filledBasinSelected: {fileID: 0}
-  _fillingText: {fileID: 1862480582}
-  _water: {fileID: 919132148511722407}
 --- !u!1 &1952349431
 GameObject:
   m_ObjectHideFlags: 0
@@ -11609,6 +11626,7 @@ GameObject:
   - component: {fileID: 578080628}
   - component: {fileID: 578080627}
   - component: {fileID: 578080629}
+  - component: {fileID: 919132148914180248}
   m_Layer: 0
   m_Name: Basin
   m_TagString: Untagged
@@ -11616,6 +11634,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &919132148914180248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148914180247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce159c7c004d26b45b91db645d6e4fee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inventory: {fileID: 1564969054}
+  _mainInfo: {fileID: 1862480582}
+  _water: {fileID: 919132148511722407}
+  _sink: {fileID: 1927677021}
+  _table: {fileID: 104968393}
 --- !u!4 &952693324829880824
 Transform:
   m_ObjectHideFlags: 0
@@ -12102,6 +12137,7 @@ MonoBehaviour:
   _water: {fileID: 1809222896}
   _grabText: {fileID: 1862480582}
   _inventory: {fileID: 1564969054}
+  _basinManagement: {fileID: 919132148914180248}
 --- !u!1 &2143236516686342417
 GameObject:
   m_ObjectHideFlags: 0

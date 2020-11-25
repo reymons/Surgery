@@ -13,11 +13,13 @@ public class Inventory : MonoBehaviour
     [SerializeField] public Sprite SpriteNotSelectedBasin;
     [SerializeField] public Sprite SpriteNotSelectedBandage;
     [SerializeField] public Sprite SpriteNotSelectedBeton;
+    [SerializeField] public Sprite SpriteNotSelectedBetonSoaked;
     [SerializeField] public Sprite SpriteNotSelectedBasinWater;
 
     [SerializeField] public Sprite SpriteSelectedBasin;
     [SerializeField] public Sprite SpriteSelectedBandage;
     [SerializeField] public Sprite SpriteSelectedBeton;
+    [SerializeField] public Sprite SpriteSelectedBetonSoaked;
     [SerializeField] public Sprite SpriteSelectedBasinWater;
 
 

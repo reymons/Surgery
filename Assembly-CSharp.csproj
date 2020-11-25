@@ -62,7 +62,7 @@
     <Compile Include="Assets\Scripts\CustomTag.cs" />
     <Compile Include="Assets\Scripts\Inventory.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
-    <Compile Include="Assets\Scripts\BasinFilling.cs" />
+    <Compile Include="Assets\Scripts\BasinManagement.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

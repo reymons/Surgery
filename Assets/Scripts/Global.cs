@@ -7,7 +7,6 @@ public class Global
     public static bool HandsAreWashed = false;
     public static bool ForAnimHandsAreWashed = false;
     public static bool BandageIsApplied = false;
-    public static bool BasinIsFilled = false;
     public static bool BetonIsSoaked = false;
     public static bool BetonIsApplied = false;
 
@@ -22,6 +21,4 @@ public class Global
 
     public static int SlotOfReturnable = -1;
     public static bool WaterIsActive = false;
-
-    public static bool BasinIsInSink = false;
 }

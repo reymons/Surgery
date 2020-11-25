@@ -34,6 +34,8 @@ public class SurgeryCharacterManagement : MonoBehaviour
                         _inventory.RemoveItemFromSlot(index);
                         Global.PlayerIsWorkingOnleg = true;
                         _consumptionText.text = "Вы забинтовали голень!";
+                        _inventory.Items[index].SpriteSelected = _inventory.SpriteEmpty;
+                        _inventory.Items[index].SpriteNotSelected = _inventory.SpriteEmpty;
                         Global.TextTimer = 3;
                     }
                     break;
@@ -46,6 +48,8 @@ public class SurgeryCharacterManagement : MonoBehaviour
                         _inventory.RemoveItemFromSlot(index);
                         Global.PlayerIsWorkingOnleg = true;
                         _consumptionText.text = "Вы наложили гипс!";
+                        _inventory.Items[index].SpriteSelected = _inventory.SpriteEmpty;
+                        _inventory.Items[index].SpriteNotSelected = _inventory.SpriteEmpty;
                         Global.TextTimer = 3;
                     }
                     break;
