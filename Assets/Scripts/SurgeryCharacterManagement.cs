@@ -12,8 +12,6 @@ public class SurgeryCharacterManagement : MonoBehaviour
 
     [SerializeField] private Text _consumptionText;
 
-    [SerializeField] private PlayerRaycast _playerRaycast;
-
     void Start()
     {
         _legBandaged.SetActive(false);
@@ -34,8 +32,9 @@ public class SurgeryCharacterManagement : MonoBehaviour
                         _legBandaged.SetActive(true);
                         Global.BandageIsApplied = true;
                         _inventory.RemoveItemFromSlot(index);
+                        Global.PlayerIsWorkingOnleg = true;
                         _consumptionText.text = "Вы забинтовали голень!";
-                        _playerRaycast.TextTimer = 3;
+                        Global.TextTimer = 3;
                     }
                     break;
                     
@@ -45,6 +44,9 @@ public class SurgeryCharacterManagement : MonoBehaviour
                         _legBetoned.SetActive(true);
                         Global.BetonIsApplied = true;
                         _inventory.RemoveItemFromSlot(index);
+                        Global.PlayerIsWorkingOnleg = true;
+                        _consumptionText.text = "Вы наложили гипс!";
+                        Global.TextTimer = 3;
                     }
                     break;
             }

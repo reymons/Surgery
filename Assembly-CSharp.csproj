@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\PlayerAnimationHandler.cs" />
     <Compile Include="Assets\Scripts\CursorManager.cs" />
+    <Compile Include="Assets\Scripts\Item.cs" />
     <Compile Include="Assets\Scripts\PlayerRaycast.cs" />
     <Compile Include="Assets\Scripts\SurgeryCharacterManagement.cs" />
     <Compile Include="Assets\Scripts\Global.cs" />
@@ -61,7 +62,7 @@
     <Compile Include="Assets\Scripts\CustomTag.cs" />
     <Compile Include="Assets\Scripts\Inventory.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
-    <Compile Include="Assets\Scripts\Item.cs" />
+    <Compile Include="Assets\Scripts\BasinFilling.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

@@ -10,13 +10,16 @@ public class Item : MonoBehaviour
 
     public bool IsSelected { get; set; }
 
-    public Item(Sprite notSelected, Sprite selected, string name, bool isSelected = false)
+    public Item(Sprite notSelected, Sprite selected, string name, GameObject obj = null, bool isSelected = false)
     {
         SpriteNotSelected = notSelected;
         SpriteSelected = selected;
         Name = name;
         IsSelected = isSelected;
+        Object = obj;
     }
 
-    public bool IsConsumed { get; set; }
+    public bool IsBlocked { get; set; }
+
+    public GameObject Object { get; set; }
 }

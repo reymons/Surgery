@@ -6,8 +6,6 @@ public class PlayerRaycast : MonoBehaviour
 {
     [SerializeField] private GameObject _water;
     [SerializeField] public Text _grabText;
-
-    [NonSerialized] public float TextTimer;
     
     [SerializeField] private Inventory _inventory;
 
@@ -20,13 +18,18 @@ public class PlayerRaycast : MonoBehaviour
     void Update()
     {
         UpdateRaycast();
-        if (TextTimer < 0)
+        if (Global.TextTimer < 0)
         {
             _grabText.text = "";
-            TextTimer = 0;
+            Global.TextTimer = 0;
         }
         else
-            TextTimer -= Time.deltaTime;
+            Global.TextTimer -= Time.deltaTime;
+
+        if (Global.GrabTimer > 0)
+        {
+            Global.GrabTimer -= Time.deltaTime;
+        }
     }
 
     private void UpdateRaycast()
@@ -41,18 +44,25 @@ public class PlayerRaycast : MonoBehaviour
                 if (hitTags.HasTag("Sink") && Input.GetMouseButtonDown(0))
                 {
                     if (_water.activeSelf)
+                    {
                         _water.SetActive(false);
+                        Global.WaterIsActive = false;
+                    }
                     else
+                    {
                         _water.SetActive(true);
+                        Global.WaterIsActive = true;
+                    }
                 }
-                else if (hitTags.HasTag("WashingHands") && Input.GetMouseButtonDown(0) && _water.activeSelf)
+                else if (hitTags.HasTag("WashingHands") && Input.GetMouseButtonDown(0) 
+                    && _water.activeSelf && !Global.BasinIsInSink && Global.GrabTimer <= 0)
                 {
                     Global.HandsAreWashed = true;
                     Global.ForAnimHandsAreWashed = true;
                     _grabText.text = hitObj.GetComponent<GrabAndConsumptionText>().GrabText;
-                    TextTimer = 3;
+                    Global.TextTimer = 3;
                 }
-                else if (hitTags.HasTag("Grabbable") && Input.GetMouseButtonDown(0))
+                else if (hitTags.HasTag("Grabbable") && Input.GetMouseButtonDown(0) && Global.GrabTimer <= 0 && !hitTags.HasTag("Returnable"))
                 {
                     Global.PlayerGrabbed = true;
                     hitObj.SetActive(false);
@@ -70,13 +80,39 @@ public class PlayerRaycast : MonoBehaviour
                     else if (hitTags.HasTag("Basin"))
                     {
                         Global.BasinIsGrabbed = true;
-                        _inventory.Items.Add(new Item(_inventory.SpriteNotSelectedBasin, _inventory.SpriteSelectedBasin, "Basin"));
+                        _inventory.Items.Add(new Item(_inventory.SpriteNotSelectedBasin, _inventory.SpriteSelectedBasin, "Basin", hitObj));
                     }
                     
                     _inventory.SetNewItemSprite();
+                    Global.GrabTimer = 1.5f;
 
                     _grabText.text = hitObj.GetComponent<GrabAndConsumptionText>().GrabText;
-                    TextTimer = 3;
+                    Global.TextTimer = 3;
+                }
+                //TODO: Объединить условия таймера и кнопки мыши
+                else if (Input.GetMouseButtonDown(0) && hitTags.HasTag("Returnable") && Global.GrabTimer <= 0)
+                {
+                    Global.PlayerGrabbed = true;
+                    hitObj.SetActive(false);
+                    
+                    Global.GrabTimer = 1.5f;
+                    hitTags.Replace("Returnable", "");
+
+                    if (!Global.BasinIsFilled)
+                    {
+                        _inventory.Items[Global.SlotOfReturnable].SpriteSelected = _inventory.SpriteSelectedBasin;
+                        _inventory.Items[Global.SlotOfReturnable].SpriteNotSelected = _inventory.SpriteNotSelectedBasin;
+                    }
+                    else
+                    {
+                        _inventory.Items[Global.SlotOfReturnable].SpriteSelected = _inventory.SpriteSelectedBasinWater;
+                        _inventory.Items[Global.SlotOfReturnable].SpriteNotSelected = _inventory.SpriteNotSelectedBasinWater;
+                    }
+                    
+                    _inventory.SetNewItemSprite();
+                    _grabText.text = hitObj.GetComponent<GrabAndConsumptionText>().GrabText;
+                    Global.TextTimer = 3;
+                    Global.BasinIsInSink = false;
                 }
             }
         }

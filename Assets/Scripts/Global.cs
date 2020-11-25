@@ -15,6 +15,13 @@ public class Global
     public static bool BandageIsGrabbed = false;
     public static bool BetonIsGrabbed = false;
     public static bool BasinIsGrabbed = false;
+    public static bool PlayerIsWorkingOnleg = false;
 
+    public static float TextTimer = 0;
+    public static float GrabTimer = 0;
 
+    public static int SlotOfReturnable = -1;
+    public static bool WaterIsActive = false;
+
+    public static bool BasinIsInSink = false;
 }

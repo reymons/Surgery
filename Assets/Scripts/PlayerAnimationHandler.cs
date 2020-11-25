@@ -9,6 +9,7 @@ public class PlayerAnimationHandler : MonoBehaviour
         UpdateAnimationWalk();
         UpdateAnimationHandWashing();
         UpdateAnimationGrabbing();
+        UpdateAnimationWorkingOnLeg();
     }
     
     private void UpdateAnimationWalk()
@@ -36,5 +37,16 @@ public class PlayerAnimationHandler : MonoBehaviour
         }
         else
             _anmtr.SetBool("IsGrabbing", false);
+    }
+
+    private void UpdateAnimationWorkingOnLeg()
+    {
+        if (Global.PlayerIsWorkingOnleg)
+        {
+            _anmtr.SetBool("IsWorkingOnLeg", true);
+            Global.PlayerIsWorkingOnleg = false;
+        }
+        else
+            _anmtr.SetBool("IsWorkingOnLeg", false);
     }
 }

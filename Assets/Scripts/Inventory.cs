@@ -13,12 +13,16 @@ public class Inventory : MonoBehaviour
     [SerializeField] public Sprite SpriteNotSelectedBasin;
     [SerializeField] public Sprite SpriteNotSelectedBandage;
     [SerializeField] public Sprite SpriteNotSelectedBeton;
+    [SerializeField] public Sprite SpriteNotSelectedBasinWater;
 
     [SerializeField] public Sprite SpriteSelectedBasin;
     [SerializeField] public Sprite SpriteSelectedBandage;
     [SerializeField] public Sprite SpriteSelectedBeton;
+    [SerializeField] public Sprite SpriteSelectedBasinWater;
 
-    [SerializeField] private Sprite _spriteEmpty;
+
+
+    [SerializeField] public Sprite SpriteEmpty;
 
     [NonSerialized] public int SelectedItemIndex = -1;
 
@@ -39,12 +43,13 @@ public class Inventory : MonoBehaviour
     {
         if (Items.Count != 0)
         {
-            if (Input.GetKeyDown(KeyCode.Alpha1) && !Items[0].IsConsumed)
+            if (Input.GetKeyDown(KeyCode.Alpha1) && !Items[0].IsBlocked)
             {
                 if (Items[0].IsSelected)
                 {
                     _inventoryIconSlots[0].sprite = Items[0].SpriteNotSelected;
                     Items[0].IsSelected = false;
+                    SelectedItemIndex = -1;
                 }
                 else
                 {
@@ -53,32 +58,40 @@ public class Inventory : MonoBehaviour
                     SelectedItemIndex = 0;
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha2) && !Items[1].IsConsumed)
+            else if (Input.GetKeyDown(KeyCode.Alpha2) && Items.Count >= 2)
             {
-                if (Items[1].IsSelected)
+                if (!Items[1].IsBlocked)
                 {
-                    _inventoryIconSlots[1].sprite = Items[1].SpriteNotSelected;
-                    Items[1].IsSelected = false;
-                }
-                else
-                {
-                    _inventoryIconSlots[1].sprite = Items[1].SpriteSelected;
-                    Items[1].IsSelected = true;
-                    SelectedItemIndex = 1;
+                    if (Items[1].IsSelected)
+                    {
+                        _inventoryIconSlots[1].sprite = Items[1].SpriteNotSelected;
+                        Items[1].IsSelected = false;
+                        SelectedItemIndex = -1;
+                    }
+                    else
+                    {
+                        _inventoryIconSlots[1].sprite = Items[1].SpriteSelected;
+                        Items[1].IsSelected = true;
+                        SelectedItemIndex = 1;
+                    }
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha3) && !Items[2].IsConsumed)
+            else if (Input.GetKeyDown(KeyCode.Alpha3) && Items.Count == 3)
             {
-                if (Items[2].IsSelected)
+                if (!Items[2].IsBlocked)
                 {
-                    _inventoryIconSlots[2].sprite = Items[2].SpriteNotSelected;
-                    Items[2].IsSelected = false;
-                }
-                else
-                {
-                    _inventoryIconSlots[2].sprite = Items[2].SpriteSelected;
-                    Items[2].IsSelected = true;
-                    SelectedItemIndex = 2;
+                    if (Items[2].IsSelected)
+                    {
+                        _inventoryIconSlots[2].sprite = Items[2].SpriteNotSelected;
+                        Items[2].IsSelected = false;
+                        SelectedItemIndex = -1;
+                    }
+                    else
+                    {
+                        _inventoryIconSlots[2].sprite = Items[2].SpriteSelected;
+                        Items[2].IsSelected = true;
+                        SelectedItemIndex = 2;
+                    }
                 }
             }
         }
@@ -86,7 +99,7 @@ public class Inventory : MonoBehaviour
         {
             for (int i = 0; i < Items.Count; i++)
             {
-                if (i != SelectedItemIndex && !Items[i].IsConsumed)
+                if (i != SelectedItemIndex && !Items[i].IsBlocked)
                 {
                     _inventoryIconSlots[i].sprite = Items[i].SpriteNotSelected;
                     Items[i].IsSelected = false;
@@ -97,7 +110,7 @@ public class Inventory : MonoBehaviour
 
     public void RemoveItemFromSlot(int slot)
     {
-        _inventoryIconSlots[slot].sprite = _spriteEmpty;
-        Items[slot].IsConsumed = true;
+        _inventoryIconSlots[slot].sprite = SpriteEmpty;
+        Items[slot].IsBlocked = true;
     }
 }
